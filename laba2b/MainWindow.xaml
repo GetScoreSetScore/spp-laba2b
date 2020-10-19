@@ -15,11 +15,11 @@
             <RowDefinition Height="112.8"/>
             <RowDefinition Height="431*"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="Menu_Main" IsMainMenu="True" Grid.Row="0" Margin="0,0,0,0" d:IsLocked="True">
+        <Menu x:Name="Menu_Main" IsMainMenu="True" Grid.Row="0" Margin="0,0,0,0">
             <MenuItem x:Name="MenuItem_File" Header="_File" >
-                <MenuItem x:Name="MenuItem_OpenFile" Header="OpenFile" Click="MenuItem_Click"/>
-                <MenuItem x:Name="MenuItem_SaveFile" Header="SaveFile"/>
-                <MenuItem x:Name="MenuItem_SaveAs" Header="SaveAs"/>
+                <MenuItem x:Name="MenuItem_OpenFile" Header="OpenFile" Click="MenuItem_OpenFile_Click"/>
+                <MenuItem x:Name="MenuItem_SaveFile" Header="SaveFile" Click="MenuItem_SaveFile_Click"/>
+                <MenuItem x:Name="MenuItem_SaveAs" Header="SaveAs" Click="MenuItem_SaveAs_Click"/>
             </MenuItem>
         </Menu>
         <Border x:Name="Border_Tools" BorderBrush="Black" BorderThickness="2" Margin="0,0.2,0,0" Grid.Row="1" Grid.RowSpan="2" Height="116" VerticalAlignment="Top" d:IsLocked="True" IsEnabled="False">
@@ -41,7 +41,7 @@
                     <RowDefinition Height="46*"/>
                     <RowDefinition Height="65*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="Button_Apply" Content="Apply changes" Margin="12,23,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" Width="87" Height="62" VerticalAlignment="Top"/>
+                <Button x:Name="Button_Apply" Click="Button_Apply_Click" Content="Apply changes" Margin="12,23,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" Width="87" Height="62" VerticalAlignment="Top"/>
 
                 <Button x:Name="Button_Draw" Grid.Column="3" Grid.Row="0" Margin="9,6,0,0" HorizontalAlignment="Left" Width="34" Height="33" VerticalAlignment="Top">
                     <Image Source="/Images/brush.jpg" Width="36"></Image>
