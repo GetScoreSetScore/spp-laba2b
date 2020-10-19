@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:laba2b"
         mc:Ignorable="d"
-        Title="No file opened - Image editor" Height="590" Width="1374" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen"
+        
+        Title="No file opened - Image editor" Height="590" Width="1374" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         >
 
     <Grid x:Name="Grid_Main">
@@ -17,12 +18,12 @@
         </Grid.RowDefinitions>
         <Menu x:Name="Menu_Main" IsMainMenu="True" Grid.Row="0" Margin="0,0,0,0">
             <MenuItem x:Name="MenuItem_File" Header="_File" >
-                <MenuItem x:Name="MenuItem_OpenFile" Header="OpenFile" Click="MenuItem_OpenFile_Click"/>
-                <MenuItem x:Name="MenuItem_SaveFile" Header="SaveFile" Click="MenuItem_SaveFile_Click"/>
-                <MenuItem x:Name="MenuItem_SaveAs" Header="SaveAs" Click="MenuItem_SaveAs_Click"/>
+                <MenuItem x:Name="MenuItem_OpenFile" Header="Open file" Click="MenuItem_OpenFile_Click"/>
+                <MenuItem x:Name="MenuItem_SaveFile" Header="Save file" Click="MenuItem_SaveFile_Click"/>
+                <MenuItem x:Name="MenuItem_SaveAs" Header="Save as..." Click="MenuItem_SaveAs_Click"/>
             </MenuItem>
         </Menu>
-        <Border x:Name="Border_Tools" BorderBrush="Black" BorderThickness="2" Margin="0,0.2,0,0" Grid.Row="1" Grid.RowSpan="2" Height="116" VerticalAlignment="Top" d:IsLocked="True" IsEnabled="False">
+        <Border x:Name="Border_Tools" BorderBrush="Black" BorderThickness="2" Margin="0,0.2,0,0" Grid.Row="1" Grid.RowSpan="2" Height="116" VerticalAlignment="Top" IsEnabled="False">
             <Grid x:Name="Grid_Tools" Background="#FFF0F0F0" Margin="0.4,0,0.4,2.4" Height="110" VerticalAlignment="Bottom" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="13*"/>
@@ -43,22 +44,22 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="Button_Apply" Click="Button_Apply_Click" Content="Apply changes" Margin="12,23,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" Width="87" Height="62" VerticalAlignment="Top"/>
 
-                <Button x:Name="Button_Draw" Grid.Column="3" Grid.Row="0" Margin="9,6,0,0" HorizontalAlignment="Left" Width="34" Height="33" VerticalAlignment="Top">
+                <Button x:Name="Button_Draw" Click="Button_Draw_Click" Grid.Column="3" Grid.Row="0" Margin="9,6,0,0" HorizontalAlignment="Left" Width="34" Height="33" VerticalAlignment="Top">
                     <Image Source="/Images/brush.jpg" Width="36"></Image>
                 </Button>
-                <Button x:Name="Button_Palette" Grid.Column="4" Grid.Row="0" Margin="7.6,6,0,0" HorizontalAlignment="Left" Width="33" Height="33" VerticalAlignment="Top">
+                <Button x:Name="Button_Palette" Click="Button_Palette_Click" Grid.Column="4" Grid.Row="0" Margin="7.6,6,0,0" HorizontalAlignment="Left" Width="33" Height="33" VerticalAlignment="Top">
                     <Image Source="/Images/palette.png"></Image>
                 </Button>
-                <Button x:Name="Button_SelectedColor" Grid.Column="5" Grid.Row="0" Margin="6.6,6,0,0" Height="33" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33" Background="Black">
-                    <Image Source="/Images/black.png"></Image>
+                <Button x:Name="Button_SelectedColor" Grid.Column="5" Grid.Row="0" Margin="6.6,6,0,0" Height="33" IsEnabled="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="33" Background="Black">
+                    
                 </Button>
 
                 <TextBlock x:Name="_TextBlock_PenWidth" Text="Pen width" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="39,5,1.4,35"/>
-                <Slider x:Name="Slider_PenWidth" Grid.Row="1" Grid.Column="3" Margin="0,24.4,25,21.4" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="100"/>
+                <Slider x:Name="Slider_PenWidth" Minimum="1" Maximum="100" Value="1" TickFrequency="1" TickPlacement="BottomRight" ValueChanged="Slider_PenWidth_ValueChanged" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="3" Margin="0,24.4,25,21.4" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="100"/>
                 <TextBlock x:Name="TextBlock_PenWidth" Text="1" Grid.Column="4" Grid.Row="1" Margin="5.6,42.2,17.4,6"/>
 
                 <TextBlock x:Name="_TextBlock_Rotation1" Text="Rotation (°)" Grid.Column="6" Grid.Row="0" Margin="41,22,0,0" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" />
-                <Slider x:Name="Slider_Rotation" Grid.Row="1" Grid.Column="6" Margin="0,5.2,6.4,35" HorizontalAlignment="Right" Width="99"/>
+                <Slider x:Name="Slider_Rotation" ValueChanged="Slider_Rotation_ValueChanged" Minimum="-1" Maximum="360" Value="0" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True"  Grid.Row="1" Grid.Column="6" Margin="0,5.2,6.4,35" HorizontalAlignment="Right" Width="99"/>
                 <TextBlock x:Name="TextBlock_Rotation" Text="0°" Grid.Column="6" Grid.Row="1" Margin="56,25,26.4,3.4"/>
 
 
@@ -67,18 +68,18 @@
                 <TextBlock x:Name="_TextBlock_Width" Text="Width" Grid.Column="7" Grid.Row="0" Margin="48.6,28,163.2,63.4" Grid.RowSpan="2" />
                 <TextBlock x:Name="_TextBlock_Height" Text="Height" Grid.Column="7" Grid.Row="0" Margin="148.6,28,57.2,63.4" Grid.RowSpan="2" />
 
-                <Slider x:Name="Slider_Width" Grid.Row="1" Grid.Column="7" Margin="0,5,134.2,35" HorizontalAlignment="Right" Width="100"/>
+                <Slider x:Name="Slider_Width" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" ValueChanged="Slider_Size_ValueChanged" Minimum="1" Maximum="200" Value="100" Grid.Row="1" Grid.Column="7" Margin="0,5,134.2,35" HorizontalAlignment="Right" Width="100"/>
                 <TextBlock x:Name="TextBlock_Width" Text="100%" Grid.Column="7" Grid.Row="1" Margin="49.6,25,162.2,3.4"/>
 
-                <Slider x:Name="Slider_Height" Grid.Row="1" Grid.Column="7" Margin="0,5,10.2,35" HorizontalAlignment="Right" Width="99"/>
+                <Slider x:Name="Slider_Height" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" ValueChanged="Slider_Size_ValueChanged" Minimum="1" Maximum="200" Value="100" Grid.Row="1" Grid.Column="7" Margin="0,5,10.2,35" HorizontalAlignment="Right" Width="99"/>
                 <TextBlock x:Name="TextBlock_Height" Text="100%" Grid.Column="7" Grid.Row="1" Margin="173.6,25,41.2,5.4"/>
 
                 <TextBlock x:Name="_TextBlock_Contrast" Text="Contrast" Grid.Column="8" Grid.Row="0" Margin="40.8,22,37.2,4.6" />
-                <Slider x:Name="Slider_Contrast" Grid.Row="1" Grid.Column="8" Margin="0,5,6.4,35" HorizontalAlignment="Right" Width="99"/>
+                <Slider x:Name="Slider_Contrast" Minimum="0" Maximum="200" Value="100" ValueChanged="Slider_Contrast_ValueChanged" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="8" Margin="0,5,6.4,35" HorizontalAlignment="Right" Width="99"/>
                 <TextBlock x:Name="TextBlock_Contrast" Text="100%" Grid.Column="8" Grid.Row="1" Margin="56,25,26.4,3.4"/>
 
                 <TextBlock x:Name="_TextBlock_Brightness" Text="Brightness" Grid.Column="9" Grid.Row="0" Margin="40.8,22,32.4,4.6" />
-                <Slider x:Name="Slider_Brightness" Grid.Row="1" Grid.Column="9" Margin="0,5,6.4,35" HorizontalAlignment="Right" Width="99"/>
+                <Slider x:Name="Slider_Brightness" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Minimum="-100" Maximum="100" Value="0" ValueChanged="Slider_Brightness_ValueChanged" Grid.Row="1" Grid.Column="9" Margin="0,5,6.4,35" HorizontalAlignment="Right" Width="99"/>
                 <TextBlock x:Name="TextBlock_Brightness" Text="100%" Grid.Column="9" Grid.Row="1" Margin="56,25,26.4,3.4"/>
 
                 <TextBlock x:Name="_TextBlock_Saturation" Text="Saturation" Grid.Column="10" Grid.Row="0" Margin="0,6,184.8,0" Height="18" VerticalAlignment="Top" HorizontalAlignment="Right" Width="68" />
@@ -86,19 +87,19 @@
                 <TextBlock x:Name="_TextBlock_Green" Text="Green" Grid.Column="10" Grid.Row="0" Margin="0,26,186.8,0" Height="17" VerticalAlignment="Top" HorizontalAlignment="Right" Width="63" />
                 <TextBlock x:Name="_TextBlock_Blue" Text="Blue" Grid.Column="10" Grid.Row="0" Margin="0,27,54.8,0" Height="17" VerticalAlignment="Top" HorizontalAlignment="Right" Width="63" />
 
-                <Slider x:Name="Slider_Red" Grid.Row="1" Grid.Column="10" Margin="0,5.2,307.8,0" HorizontalAlignment="Right" Width="100" Height="23" VerticalAlignment="Top"/>
+                <Slider x:Name="Slider_Red" Minimum="0" Maximum="200" Value="100" ValueChanged="Slider_Saturation_ValueChanged" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="10" Margin="0,5.2,307.8,0" HorizontalAlignment="Right" Width="100" Height="23" VerticalAlignment="Top"/>
                 <TextBlock x:Name="TextBlock_Red" Text="100%" Grid.Column="10" Grid.Row="1" Margin="0,25.2,339.8,0" Height="19" VerticalAlignment="Top" HorizontalAlignment="Right" Width="39"/>
 
-                <Slider x:Name="Slider_Green" Grid.Row="1" Grid.Column="10" Margin="0,5.2,166.8,0" HorizontalAlignment="Right" Width="99" Height="23" VerticalAlignment="Top"/>
+                <Slider x:Name="Slider_Green" Minimum="0" Maximum="200" Value="100" ValueChanged="Slider_Saturation_ValueChanged" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="10" Margin="0,5.2,166.8,0" HorizontalAlignment="Right" Width="99" Height="23" VerticalAlignment="Top"/>
                 <TextBlock x:Name="TextBlock_Green" Text="100%" Grid.Column="10" Grid.Row="1" Margin="0,25.2,190.8,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Right" Width="45"/>
 
-                <Slider x:Name="Slider_Blue" Grid.Row="1" Grid.Column="10" Margin="0,5.2,37.8,0" HorizontalAlignment="Right" Width="99" Height="23" VerticalAlignment="Top"/>
+                <Slider x:Name="Slider_Blue" Minimum="0" Maximum="200" Value="100" ValueChanged="Slider_Saturation_ValueChanged" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="10" Margin="0,5.2,37.8,0" HorizontalAlignment="Right" Width="99" Height="23" VerticalAlignment="Top"/>
                 <TextBlock x:Name="TextBlock_Blue" Text="100%" Grid.Column="10" Grid.Row="1" Margin="0,25.2,60.8,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="45"/>
 
             </Grid>
         </Border>
         <ScrollViewer x:Name="ScrollViewer_Drawing" Grid.Row="2" Background="AliceBlue" Margin="0,5.4,0,-0.2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-            <StackPanel x:Name="StackPanel_Picture" Height="360" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400">
+            <StackPanel x:Name="StackPanel_Picture" MouseDown="StackPanel_Picture_MouseDown" MouseUp="StackPanel_Picture_MouseUp" MouseMove="StackPanel_Picture_MouseMove" Height="360" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400">
 
                 <Image x:Name="Image_Picture" Width="400" Height="360" HorizontalAlignment="Left"/>
             </StackPanel>
